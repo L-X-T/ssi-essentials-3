@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnDestroy, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -12,9 +12,9 @@ import { share, takeUntil } from 'rxjs/operators';
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css']
 })
-export class FlightSearchComponent implements OnDestroy {
-  from = 'Graz';
-  to = 'Hamburg';
+export class FlightSearchComponent implements OnInit, OnDestroy {
+  from = 'Hamburg';
+  to = 'Graz';
 
   flights: Flight[] = []; // old school
   flights$?: Observable<Flight[]>; // observable
@@ -31,6 +31,17 @@ export class FlightSearchComponent implements OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly flightService = inject(FlightService);
   // constructor(private flightService: FlightService) {}
+
+  basket: { [id: number]: boolean } = {
+    3: true,
+    5: true
+  };
+
+  ngOnInit(): void {
+    if (this.from && this.to) {
+      this.onSearch();
+    }
+  }
 
   onSearch(): void {
     // 1. my observable
