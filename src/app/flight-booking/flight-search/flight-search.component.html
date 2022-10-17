@@ -40,7 +40,7 @@
           <td>{{ f.to | city: 'long' }}</td>
           <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
           <td>
-            <a (click)="onSelect(f)">Select</a>
+            <a (click)="onSelectToggle(f)">Select</a>
           </td>
         </tr>
       </tbody>
@@ -51,7 +51,15 @@
 <div *ngIf="flights.length > 0" class="row">
   <div *ngFor="let f of flights" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
     <!--<app-flight-card [item]="f" [isSelected]="basket[f.id]" (isSelectedChange)="basket[f.id] = $event"></app-flight-card>-->
-    <app-flight-card [item]="f" [(isSelected)]="basket[f.id]"></app-flight-card>
+    <app-flight-card [item]="f" [isSelected]="basket[f.id]">
+      <h3 class="top">Flight</h3>
+      <ng-container class="bottom">
+        <button class="btn btn-default" (click)="onSelectToggle(f)">
+          {{ basket[f.id] ? 'Rem.' : 'Add' }}
+        </button>
+        <app-flight-status-toggle style="margin-left: 10px" [(isDelayed)]="f.delayed"></app-flight-status-toggle>
+      </ng-container>
+    </app-flight-card>
   </div>
 </div>
 
@@ -81,7 +89,7 @@
           <td>{{ f.to | city: 'long' }}</td>
           <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
           <td>
-            <a (click)="onSelect(f)">Select</a>
+            <a (click)="onSelectToggle(f)">Select</a>
           </td>
         </tr>
       </tbody>
@@ -109,7 +117,7 @@
           <td>{{ f.to | city: 'long' }}</td>
           <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
           <td>
-            <a (click)="onSelect(f)">Select</a>
+            <a (click)="onSelectToggle(f)">Select</a>
           </td>
         </tr>
       </tbody>
