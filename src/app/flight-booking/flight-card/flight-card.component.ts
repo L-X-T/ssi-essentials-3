@@ -8,7 +8,7 @@ import { Flight } from '../../entities/flight';
   styleUrls: ['./flight-card.component.css']
 })
 export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
-  debug = false;
+  debug = true;
 
   @Input({ required: true }) item!: Flight;
   @Input() isSelected = false;
