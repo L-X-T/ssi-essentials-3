@@ -6,9 +6,10 @@
   <div class="content">
     <form #flightSearchForm="ngForm">
       <div class="form-group">
-        <label>From:</label>
+        <label>From (*)</label>
         <input
           [(ngModel)]="from"
+          [ngModelOptions]="{ updateOn: 'blur' }"
           autocomplete="false"
           name="from"
           class="form-control"
@@ -20,15 +21,16 @@
       </div>
 
       <app-flight-validation-errors
-        *ngIf="flightSearchForm.controls['from']"
+        *ngIf="flightSearchForm.controls['from']?.dirty"
         [errors]="flightSearchForm.controls['from'].errors"
         fieldLabel="From"
       />
 
       <div class="form-group">
-        <label>To:</label>
+        <label>To (*)</label>
         <input
           [(ngModel)]="to"
+          [ngModelOptions]="{ updateOn: 'blur' }"
           name="to"
           class="form-control"
           required="required"
@@ -39,13 +41,13 @@
       </div>
 
       <app-flight-validation-errors
-        *ngIf="flightSearchForm.controls['to']"
+        *ngIf="flightSearchForm.controls['to']?.dirty"
         [errors]="flightSearchForm.controls['to'].errors"
         fieldLabel="To"
       />
 
       <div class="form-group">
-        <button [disabled]="!to || !from || flightSearchForm.invalid" (click)="onSearch()" class="btn btn-default">Search</button>
+        <button (click)="onSearch()" class="btn btn-default">Search</button>
 
         <button *ngIf="flights.length > 1" class="btn btn-default" style="margin-left: 10px" (click)="removeSecondFlight()">
           Remove 2nd flight

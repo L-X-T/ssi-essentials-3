@@ -7,6 +7,6 @@ import { ValidationErrors } from '@angular/forms';
   styleUrls: ['./flight-validation-errors.component.css']
 })
 export class FlightValidationErrorsComponent {
-  @Input() errors: ValidationErrors | undefined | null;
+  @Input() errors: ValidationErrors | null = null;
   @Input() fieldLabel = 'Field';
 }
