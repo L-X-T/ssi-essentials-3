@@ -57,6 +57,10 @@
       <div class="form-group">
         <button (click)="onSearch()" class="btn btn-default">Search</button>
 
+        <button [disabled]="flights.length === 0" (click)="delayFirstFlight()" class="btn btn-default" style="margin-left: 10px">
+          Delay first flight
+        </button>
+
         <button *ngIf="flights.length > 1" class="btn btn-default" style="margin-left: 10px" (click)="removeSecondFlight()">
           Remove 2nd flight
         </button>
