@@ -19,10 +19,34 @@ export class FlightEditComponent implements OnChanges {
   private readonly flightService = inject(FlightService);
 
   editForm: FormGroup = inject(FormBuilder).group({
-    id: [0, Validators.required],
-    from: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
-    to: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
-    date: ['', [Validators.required, Validators.minLength(33), Validators.maxLength(33)]]
+    id: [
+      0,
+      {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }
+    ],
+    from: [
+      '',
+      {
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+        updateOn: 'blur'
+      }
+    ],
+    to: [
+      '',
+      {
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+        updateOn: 'blur'
+      }
+    ],
+    date: [
+      '',
+      {
+        validators: [Validators.required, Validators.minLength(33), Validators.maxLength(33)],
+        updateOn: 'blur'
+      }
+    ]
   });
 
   message = '';
