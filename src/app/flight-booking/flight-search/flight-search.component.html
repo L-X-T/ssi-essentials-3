@@ -102,7 +102,7 @@
           {{ basket[f.id] ? 'Rem.' : 'Add' }}
         </button>
         <app-flight-status-toggle style="margin-right: 10px" [(isDelayed)]="f.delayed"></app-flight-status-toggle>
-        <button class="btn btn-default" [routerLink]="['/flight-edit', f.id, { showDetails: true }]">Edit</button>
+        <button class="btn btn-default" [routerLink]="['/flight-booking', 'flight-edit', f.id, { showDetails: true }]">Edit</button>
       </ng-container>
     </app-flight-card>
   </div>
