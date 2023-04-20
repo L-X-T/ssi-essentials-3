@@ -9,6 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { validateCity } from '../shared/validation/city-validator';
 import { validateAsyncCity } from '../shared/validation/async-city-validator';
 import { validateRoundTrip } from '../shared/validation/round-trip-validator';
+import { pattern } from '../../shared/global';
 
 @Component({
   selector: 'app-flight-edit',
@@ -21,6 +22,7 @@ export class FlightEditComponent implements OnChanges {
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly flightService = inject(FlightService);
+  private readonly pattern = pattern;
 
   editForm: FormGroup = inject(FormBuilder).group(
     {
@@ -39,6 +41,7 @@ export class FlightEditComponent implements OnChanges {
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(15),
+            Validators.pattern(this.pattern),
             validateCity(['Graz', 'Wien', 'Hamburg', 'Berlin'])
           ],
           updateOn: 'blur'
@@ -51,6 +54,7 @@ export class FlightEditComponent implements OnChanges {
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(15),
+            Validators.pattern(this.pattern),
             validateCity(['Graz', 'Wien', 'Hamburg', 'Berlin'])
           ],
           updateOn: 'blur'

@@ -7,6 +7,7 @@ import { Flight } from '../../entities/flight';
 import { FlightService } from '../../services/flight.service';
 import { BehaviorSubject, Observable, Observer, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
+import { pattern } from '../../shared/global';
 
 @Component({
   selector: 'app-flight-search',
@@ -32,6 +33,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   selectedFlight: Flight | null = null;
   flightToEdit: Flight | null = null;
+  readonly pattern = pattern;
 
   message = '';
 
