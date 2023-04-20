@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, Input, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Flight } from '../../entities/flight';
@@ -18,10 +18,10 @@ export class FlightEditComponent implements OnChanges {
   private readonly flightService = inject(FlightService);
 
   editForm: FormGroup = inject(FormBuilder).group({
-    id: [0],
-    from: [''],
-    to: [''],
-    date: ['']
+    id: [0, Validators.required],
+    from: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+    to: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+    date: ['', [Validators.required, Validators.minLength(33), Validators.maxLength(33)]]
   });
 
   message = '';
