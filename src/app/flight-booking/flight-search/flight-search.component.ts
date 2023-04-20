@@ -16,8 +16,8 @@ import { share, takeUntil } from 'rxjs/operators';
 export class FlightSearchComponent implements OnInit, OnDestroy {
   @ViewChild('flightSearchForm') flightSearchForm?: FormGroup;
 
-  from = '';
-  to = '';
+  from = 'Hamburg';
+  to = 'Graz';
 
   minLength = 3;
   maxLength = 15;
