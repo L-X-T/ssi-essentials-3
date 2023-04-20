@@ -55,7 +55,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightsSignal.set(flights);
       },
       error: (errResp: HttpErrorResponse) => console.error('Error loading flights', errResp),
-      complete: () => console.debug('Flights loading completed.')
+      complete: () => {
+        // console.debug('Flights loading completed.');
+      }
     };
 
     // 3a. my subscription
