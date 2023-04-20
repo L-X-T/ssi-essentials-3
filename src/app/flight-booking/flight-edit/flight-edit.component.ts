@@ -1,6 +1,7 @@
 import { Component, DestroyRef, inject, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 import { Flight } from '../../entities/flight';
 import { FlightService } from '../../services/flight.service';
@@ -26,9 +27,15 @@ export class FlightEditComponent implements OnChanges {
 
   message = '';
 
-  private readonly valueChangesLogger = this.editForm.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
-    console.log(value);
-  });
+  private readonly valueChangesLogger = this.editForm.valueChanges
+    .pipe(
+      debounceTime(250),
+      distinctUntilChanged((a, b) => a.id === b.id && a.from === b.from && a.to === b.to && a.date === b.date),
+      takeUntilDestroyed()
+    )
+    .subscribe((value) => {
+      console.log(value);
+    });
 
   ngOnChanges(): void {
     if (this.flight) {
