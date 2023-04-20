@@ -7,6 +7,7 @@ import { Flight } from '../../entities/flight';
 import { FlightService } from '../../services/flight.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { validateCity } from '../shared/validation/city-validator';
+import { validateAsyncCity } from '../shared/validation/async-city-validator';
 
 @Component({
   selector: 'app-flight-edit',
@@ -30,6 +31,7 @@ export class FlightEditComponent implements OnChanges {
     from: [
       '',
       {
+        asyncValidators: [validateAsyncCity(this.flightService)],
         validators: [
           Validators.required,
           Validators.minLength(3),
