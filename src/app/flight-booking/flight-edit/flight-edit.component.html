@@ -29,6 +29,8 @@
 
   <app-flight-validation-errors *ngIf="editForm.controls['date']?.dirty" fieldLabel="Date" [errors]="editForm.controls['date'].errors" />
 
+  <app-flight-validation-errors *ngIf="editForm.dirty" fieldLabel="Form" [errors]="editForm.errors" />
+
   <div class="form-group">
     <button (click)="save()" class="btn btn-default">Save</button>
   </div>
