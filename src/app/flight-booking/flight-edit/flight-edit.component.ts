@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Flight } from '../../entities/flight';
 import { FlightService } from '../../services/flight.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { validateCity } from '../shared/validation/city-validator';
 
 @Component({
   selector: 'app-flight-edit',
@@ -29,14 +30,14 @@ export class FlightEditComponent implements OnChanges {
     from: [
       '',
       {
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15), validateCity],
         updateOn: 'blur'
       }
     ],
     to: [
       '',
       {
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15), validateCity],
         updateOn: 'blur'
       }
     ],
