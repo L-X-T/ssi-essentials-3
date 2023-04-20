@@ -31,6 +31,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   // readonly terminator$ = this.onDestroySubject.asObservable();
 
   selectedFlight: Flight | null = null;
+  flightToEdit: Flight | null = null;
 
   message = '';
 
@@ -99,7 +100,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.selectedFlight = this.basket[flight.id] ? flight : null;
   }
 
-  onSave(): void {
+  /*onSave(): void {
     if (this.selectedFlight) {
       this.flightService
         .save(this.selectedFlight)
@@ -116,7 +117,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           }
         });
     }
-  }
+  }*/
 
   trackById(index: number, flight: Flight): number {
     return flight.id;
