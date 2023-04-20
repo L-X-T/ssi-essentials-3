@@ -1,7 +1,7 @@
 import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
@@ -30,6 +30,7 @@ export class FlightEditComponent implements OnChanges {
   private readonly flightService = inject(FlightService);
   private readonly pattern = pattern;
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   editForm: FormGroup = inject(FormBuilder).group(
     {
@@ -114,6 +115,8 @@ export class FlightEditComponent implements OnChanges {
           this.flight = flight;
           this.message = 'Success saving!';
           this.patchFormValue();
+
+          setTimeout(() => this.router.navigate(['/flight-search']), 3000);
         },
         error: (err: HttpErrorResponse) => {
           if (this.debug) {
