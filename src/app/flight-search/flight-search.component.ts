@@ -1,10 +1,10 @@
-import { Component, DestroyRef, inject, OnDestroy } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Flight } from '../entities/flight';
 import { FlightService } from './flight.service';
-import { Observable, Observer, pipe, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, pipe, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -16,8 +16,10 @@ export class FlightSearchComponent implements OnDestroy {
   from = 'Graz';
   to = 'Hamburg';
 
-  flights: Flight[] = [];
-  flights$?: Observable<Flight[]>;
+  flights: Flight[] = []; // old school
+  flights$?: Observable<Flight[]>; // observable
+  flightsSubject = new BehaviorSubject<Flight[]>([]); // subject
+  flightsSignal = signal<Flight[]>([]); // signal
   flightsSubscription?: Subscription;
   // private readonly onDestroySubject = new Subject<void>();
   // readonly terminator$ = this.onDestroySubject.asObservable();
@@ -36,7 +38,11 @@ export class FlightSearchComponent implements OnDestroy {
 
     // 2. my observer
     const flightsObserver: Observer<Flight[]> = {
-      next: (flights) => (this.flights = flights),
+      next: (flights) => {
+        this.flights = flights;
+        this.flightsSubject.next(flights);
+        this.flightsSignal.set(flights);
+      },
       error: (errResp: HttpErrorResponse) => console.error('Error loading flights', errResp),
       complete: () => console.debug('Flights loading completed.')
     };
@@ -59,6 +65,9 @@ export class FlightSearchComponent implements OnDestroy {
     // 4b. subject emit thru terminator$
     // this.onDestroySubject.next(void 0);
     // this.onDestroySubject.complete();
+
+    // complete behavior subject
+    this.flightsSubject.complete();
   }
 
   onSelect(selectedFlight: Flight): void {

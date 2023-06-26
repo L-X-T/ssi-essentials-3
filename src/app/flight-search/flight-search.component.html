@@ -49,7 +49,7 @@
 </div>
 
 <!-- duplicated this part to demonstrate async pipe -->
-<div *ngIf="flights$ | async as asyncFlights" class="card">
+<div *ngIf="flightsSubject | async as asyncFlights" class="card">
   <div class="content">
     <table class="table table-condensed" *ngIf="asyncFlights.length > 0">
       <thead>
@@ -63,6 +63,34 @@
       </thead>
       <tbody>
         <tr *ngFor="let f of asyncFlights" [class.active]="f.id === selectedFlight?.id">
+          <td>{{ f.id }}</td>
+          <td>{{ f.from | city: 'short' }}</td>
+          <td>{{ f.to | city: 'long' }}</td>
+          <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
+          <td>
+            <a (click)="onSelect(f)">Select</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- duplicated this part again to demonstrate signals -->
+<div *ngIf="flightsSignal().length > 0" class="card">
+  <div class="content">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of flightsSignal()" [class.active]="f.id === selectedFlight?.id">
           <td>{{ f.id }}</td>
           <td>{{ f.from | city: 'short' }}</td>
           <td>{{ f.to | city: 'long' }}</td>
