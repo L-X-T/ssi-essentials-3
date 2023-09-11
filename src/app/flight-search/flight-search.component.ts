@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Flight } from '../entities/flight';
+import { FlightService } from './flight.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -9,24 +10,19 @@ import { Flight } from '../entities/flight';
   styleUrls: ['./flight-search.component.css']
 })
 export class FlightSearchComponent {
-  from = '';
-  to = '';
+  from = 'Graz';
+  to = 'Hamburg';
   flights: Flight[] = [];
   selectedFlight?: Flight;
 
   message = '';
 
-  private readonly http = inject(HttpClient);
-
-  private readonly url = 'http://www.angular.at/api/flight';
-  private readonly headers = new HttpHeaders().set('Accept', 'application/json');
+  private readonly flightService = inject(FlightService);
+  // constructor(private flightService: FlightService) {}
 
   onSearch(): void {
-    const params = new HttpParams().set('from', this.from).set('to', this.to);
-
-    this.http.get<Flight[]>(this.url, { headers: this.headers, params }).subscribe({
-      next: (flights: Flight[]) => {
-        console.log('Flights loaded: ', flights);
+    this.flightService.find(this.from, this.to).subscribe({
+      next: (flights) => {
         this.flights = flights;
       },
       error: (errResp: HttpErrorResponse) => {
@@ -43,16 +39,18 @@ export class FlightSearchComponent {
   }
 
   onSave(): void {
-    this.http.post<Flight>(this.url, this.selectedFlight, { headers: this.headers }).subscribe({
-      next: (flight) => {
-        console.log('Flight saved: ', flight);
-        this.selectedFlight = flight;
-        this.message = 'Success!';
-      },
-      error: (errResponse: HttpErrorResponse) => {
-        console.error('Error saving flight', errResponse);
-        this.message = 'Error: ' + errResponse.message;
-      }
-    });
+    if (this.selectedFlight) {
+      this.flightService.save(this.selectedFlight).subscribe({
+        next: (flight) => {
+          console.log('Flight saved: ', flight);
+          this.selectedFlight = flight;
+          this.message = 'Success!';
+        },
+        error: (errResponse: HttpErrorResponse) => {
+          console.error('Error saving flight', errResponse);
+          this.message = 'Error: ' + errResponse.message;
+        }
+      });
+    }
   }
 }
