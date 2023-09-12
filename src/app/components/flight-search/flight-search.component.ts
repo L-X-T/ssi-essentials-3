@@ -6,8 +6,11 @@ import { Flight } from '../../entities/flight';
 import { FlightService } from '../../services/flight.service';
 import { BehaviorSubject, Observable, Observer, pipe, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
+  standalone: true,
+  imports: [SharedModule],
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css']

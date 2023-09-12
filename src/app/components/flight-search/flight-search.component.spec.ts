@@ -8,7 +8,7 @@ describe('FlightSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FlightSearchComponent]
+      imports: [FlightSearchComponent]
     }).compileComponents();
   });
 
