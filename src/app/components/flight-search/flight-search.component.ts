@@ -6,11 +6,13 @@ import { Flight } from '../../entities/flight';
 import { FlightService } from '../../services/flight.service';
 import { BehaviorSubject, Observable, Observer, pipe, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
-import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CityPipe } from '../../pipes/city.pipe';
 
 @Component({
   standalone: true,
-  imports: [SharedModule],
+  imports: [CommonModule, FormsModule, CityPipe],
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css']
