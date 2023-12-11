@@ -153,7 +153,7 @@ To do this, you can follow the points below or just look up if necessary.
    <p>
 
    ```typescript
-   constructor(private flightServie: AbstractFlightService) { […] }
+   private flightService = inject(AbstractFlightService);
    ```
 
    </p>
