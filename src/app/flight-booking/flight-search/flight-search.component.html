@@ -6,8 +6,9 @@
   <div class="content">
     <form #flightSearchForm="ngForm" [roundTrip]="['from', 'to']" [asyncMulti]="['from', 'to']">
       <div class="form-group">
-        <label>From (*)</label>
+        <label for="fsf_from">From (*)</label>
         <input
+          id="fsf_from"
           [(ngModel)]="from"
           [ngModelOptions]="{ updateOn: 'blur' }"
           autocomplete="false"
@@ -30,8 +31,9 @@
       />
 
       <div class="form-group">
-        <label>To (*)</label>
+        <label for="fsf_to">To (*)</label>
         <input
+          id="fsf_to"
           [(ngModel)]="to"
           [ngModelOptions]="{ updateOn: 'blur' }"
           name="to"
@@ -138,7 +140,7 @@
           <td>{{ f.to | city: 'long' }}</td>
           <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
           <td>
-            <a (click)="onSelectToggle(f)">Select</a>
+            <a (click)="onSelectToggle(f)" (keypress)="onSelectToggle(f)" tabindex="0">Select</a>
           </td>
         </tr>
       </tbody>
@@ -166,7 +168,7 @@
           <td>{{ f.to | city: 'long' }}</td>
           <td>{{ f.date | date: 'dd.MM.yyyy HH:mm' }}</td>
           <td>
-            <a (click)="onSelectToggle(f)">Select</a>
+            <a (click)="onSelectToggle(f)" (keypress)="onSelectToggle(f)" tabindex="1">Select</a>
           </td>
         </tr>
       </tbody>

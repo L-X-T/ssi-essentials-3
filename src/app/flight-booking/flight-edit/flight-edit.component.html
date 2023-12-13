@@ -1,14 +1,14 @@
 <form [formGroup]="editForm">
   <div class="form-group">
-    <label>Id:</label>
-    <input formControlName="id" class="form-control" />
+    <label for="id">Id:</label>
+    <input formControlName="id" id="id" class="form-control" />
   </div>
 
   <app-flight-validation-errors *ngIf="editForm.controls['id']?.dirty" fieldLabel="Id" [errors]="editForm.controls['id'].errors" />
 
   <div class="form-group">
-    <label>From:</label>
-    <input formControlName="from" class="form-control" />
+    <label for="from">From:</label>
+    <input formControlName="from" id="from" class="form-control" />
   </div>
 
   <div *ngIf="editForm.controls['from']?.pending" class="text-warning">Checking city ...</div>
@@ -16,15 +16,15 @@
   <app-flight-validation-errors *ngIf="editForm.controls['from']?.dirty" fieldLabel="From" [errors]="editForm.controls['from'].errors" />
 
   <div class="form-group">
-    <label>To:</label>
-    <input formControlName="to" class="form-control" />
+    <label for="to">To:</label>
+    <input formControlName="to" id="to" class="form-control" />
   </div>
 
   <app-flight-validation-errors *ngIf="editForm.controls['to']?.dirty" fieldLabel="To" [errors]="editForm.controls['to'].errors" />
 
   <div class="form-group">
-    <label>Date:</label>
-    <input formControlName="date" class="form-control" />
+    <label for="date">Date:</label>
+    <input formControlName="date" id="date" class="form-control" />
   </div>
 
   <app-flight-validation-errors *ngIf="editForm.controls['date']?.dirty" fieldLabel="Date" [errors]="editForm.controls['date'].errors" />
