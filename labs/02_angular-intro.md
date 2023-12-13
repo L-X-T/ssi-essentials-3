@@ -127,13 +127,13 @@ In this first part of the exercise you will implement the _FlightSearchComponent
      <div class="content">
        <form>
          <div class="form-group">
-           <label>From:</label>
-           <input class="form-control" name="from" />
+           <label for="fsf_from">From (*)</label>
+           <input id="fsf_from" class="form-control" name="from" />
          </div>
 
          <div class="form-group">
-           <label>To:</label>
-           <input class="form-control" name="to" />
+           <label for="fsf_to">To (*)</label>
+           <input id="fsf_to" class="form-control" name="to" />
          </div>
 
          <div class="form-group">
