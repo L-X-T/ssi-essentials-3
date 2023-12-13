@@ -86,7 +86,11 @@ This component should be able to be called up as follows:
   <label>From</label>
   <input class="form-control" name="from" [(ngModel)]="from" required minlength="3" />
 
-  <app-flight-validation-errors *ngIf="form.controls['from']" label="From" [errors]="form.controls['from'].errors" />
+  <app-flight-validation-errors
+    *ngIf="flightSearchForm.controls['from']"
+    [errors]="flightSearchForm.controls['from'].errors"
+    label="From"
+  />
 </div>
 ```
 

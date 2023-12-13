@@ -153,7 +153,7 @@ Caution: This lab assumes you already know some basics and thus is a bit more di
 
        ngOnChanges(): void {
          if (this.flight) {
-            this.editForm.patchValue({ ...this.flight });
+            this.editForm.patchValue(this.flight);
          }
        }
 
@@ -200,23 +200,23 @@ Caution: This lab assumes you already know some basics and thus is a bit more di
    ```html
    <form [formGroup]="editForm">
      <div class="form-group">
-       <label>Id:</label>
-       <input formControlName="id" class="form-control" />
+       <label for="id">Id:</label>
+       <input formControlName="id" id="id" class="form-control" />
      </div>
 
      <div class="form-group">
-       <label>From:</label>
-       <input formControlName="from" class="form-control" />
+       <label for="from">From:</label>
+       <input formControlName="from" id="from" class="form-control" />
      </div>
 
      <div class="form-group">
-       <label>To:</label>
-       <input formControlName="to" class="form-control" />
+       <label for="to">To:</label>
+       <input formControlName="to" id="to" class="form-control" />
      </div>
 
      <div class="form-group">
-       <label>Date:</label>
-       <input formControlName="date" class="form-control" />
+       <label for="date">Date:</label>
+       <input formControlName="date" id="date" class="form-control" />
      </div>
 
      <div class="form-group">
